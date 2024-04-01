@@ -1,6 +1,8 @@
 import torch
 import torch.nn as nn
 
+
+
 class RNN(nn.Module):
     def __init__(self, n_features, n_hidden):
         super(RNN, self).__init__()
@@ -27,5 +29,6 @@ class RNN(nn.Module):
 
         return y
 
-
 rnn_model = RNN(n_features=1, n_hidden=64)
+loss = nn.L1Loss()
+optimizer = torch.optim.Adam(rnn_model.parameters())
