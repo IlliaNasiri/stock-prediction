@@ -1,6 +1,6 @@
 
 from model import rnn_model
-from training_config import TrainingConfig
+from config import TestingConfig
 from utils import *
 import numpy as np
 
@@ -10,12 +10,12 @@ matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 
 def visualize():
-    data_path = TrainingConfig.get("data_path")
-    attribute = TrainingConfig.get("attribute")
-    window_size = TrainingConfig.get("window_size")
-    train_size = TrainingConfig.get("train_size")
-    model_save_path = TrainingConfig.get("model_save_path")
-    visualization_save_path = TrainingConfig.get("visualization_save_path")
+    data_path = TestingConfig.get("data_path")
+    attribute = TestingConfig.get("attribute")
+    window_size = TestingConfig.get("window_size")
+    train_size = TestingConfig.get("train_size")
+    model_save_path = TestingConfig.get("model_save_path")
+    visualization_save_path = TestingConfig.get("visualization_save_path")
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -26,6 +26,7 @@ def visualize():
 
     rnn_model.eval()
     with torch.inference_mode():
+
         predictions = rnn_model(X_test)
 
         plt.plot( np.arange(y_test.shape[0]), y_test, label="actual", color="blue" )
@@ -33,3 +34,15 @@ def visualize():
         plt.savefig(visualization_save_path)
 
 visualize()
+
+# preds = X_test[0].squeeze().tolist()
+#
+# for i in range( 20 ):
+#     new_pred = rnn_model(torch.tensor(preds[-4:], dtype=torch.float32).view(1,4,1))
+#     preds += [new_pred.item()]
+#
+# preds = np.array(preds[4:])
+#
+# plt.plot(np.arange(y_test.shape[0]), y_test, label="actual", color="blue" )
+# plt.plot( np.arange(20), preds, label="prediction", color="red" )
+# plt.savefig("RNN/visualizations/aaa.jpg")

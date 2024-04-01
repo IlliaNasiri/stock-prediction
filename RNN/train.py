@@ -1,7 +1,6 @@
-from model import RNN, rnn_model
-import torch.nn as nn
+from model import RNN, rnn_model, loss, optimizer
 from utils import *
-from training_config import TrainingConfig
+from config import TrainingConfig
 
 def train():
     data_path = TrainingConfig.get("data_path")
@@ -18,8 +17,8 @@ def train():
 
     # define loss fn and an optimizer
     # TODO: make optimizer and loss global so it could be used for both test.py and train.py
-    loss = nn.L1Loss()
-    optimizer = torch.optim.Adam(rnn_model.parameters())
+
+
 
     for epoch in range(epochs):
         rnn_model.train()
