@@ -65,3 +65,12 @@ def get_windowed_data_splits(path, attr, window_size, percentage, convert_to_ten
     split_point = int(X.shape[0] * percentage)
     X_train, y_train, X_test, y_test = X[:split_point], y[:split_point], X[split_point:], y[split_point:]
     return windowed_data, X_train, y_train, X_test, y_test
+
+def save_model(model, save_path):
+    if save_path is not None:
+    # https://stackoverflow.com/questions/42703500/how-do-i-save-a-trained-model-in-pytorch
+        torch.save(model.state_dict(), save_path)
+
+def load_model(model, path):
+    # https://stackoverflow.com/questions/42703500/how-do-i-save-a-trained-model-in-pytorch
+    model.load_state_dict(torch.load(path))
