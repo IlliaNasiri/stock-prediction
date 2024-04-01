@@ -1,7 +1,6 @@
 import torch
 import torch.nn as nn
 
-# TODO: play with the architecture by: Stacking RNNs, more deep and broad dense layers
 class RNN(nn.Module):
     def __init__(self, n_features, n_hidden):
         super(RNN, self).__init__()
@@ -21,10 +20,12 @@ class RNN(nn.Module):
         out, _ = self.rnn(x, h0)
         # hn: last hidden state
         hn = out[:, -1, :].squeeze()
-        # print(hn.shape)
 
         y = self.LL1(hn)
         y = self.ReLU(y)
         y = self.LL2(y)
 
         return y
+
+
+rnn_model = RNN(n_features=1, n_hidden=64)
