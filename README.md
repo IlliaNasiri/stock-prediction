@@ -5,7 +5,9 @@
 ## Sliding Window ##
 
 ## Architecture ##
-![Untitled Diagram drawio (2)](https://github.com/IlliaNasiri/stock-prediction/assets/135656013/b4877fc9-93d5-4fbf-b0f7-9de7e13424ee)
+![RNN drawio](https://github.com/IlliaNasiri/stock-prediction/assets/135656013/7df3a7e6-3e85-494b-8af1-767e50c91290)
+
+
 
 ### config.py: ###
 this file allows you to configure the parameters of the training and testing phases for the RNN stock-prediction model, as well as the visualization.
