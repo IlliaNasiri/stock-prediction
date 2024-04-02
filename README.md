@@ -33,9 +33,9 @@ TestingConfig = {
     "data_path": "data/GOOG.csv", # path to the CSV file to use for testing
     "attribute": "close", # the attribute that the RNN is going to be tested on
     "window_size": 5, # Size of the sliding window
-    "test_size": 0.0, the portion of data used for testing
+    "test_size": 0.0, #the portion of data used for testing
     "model_save_path": "RNN/trained_models/rnn.pth", # path where to find the model
-    "visualization_save_path": "RNN/visualizations/comparison.jpg" # NOTE: the folder MUST EXIST!
+    "visualization_save_path": #"RNN/visualizations/comparison.jpg" # NOTE: the folder MUST EXIST!
 }
 
 ```
