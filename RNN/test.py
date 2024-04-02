@@ -8,7 +8,7 @@ def test():
     data_path = TestingConfig.get("data_path")
     attribute = TestingConfig.get("attribute")
     window_size = TestingConfig.get("window_size")
-    train_size = TestingConfig.get("train_size")
+    test_size = TestingConfig.get("test_size")
     save_path = TestingConfig.get("model_save_path")
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -16,7 +16,7 @@ def test():
     rnn_model.to(device)
     load_model(rnn_model, save_path)
 
-    _, _, _, X_test, y_test = get_windowed_data_splits(data_path, attribute, window_size, train_size)
+    _, _, _, X_test, y_test = get_windowed_data_splits(data_path, attribute, window_size, 1 - test_size)
 
     rnn_model.eval()
     with torch.inference_mode():

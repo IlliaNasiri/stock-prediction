@@ -13,7 +13,7 @@ def visualize():
     data_path = TestingConfig.get("data_path")
     attribute = TestingConfig.get("attribute")
     window_size = TestingConfig.get("window_size")
-    train_size = TestingConfig.get("train_size")
+    test_size = TestingConfig.get("test_size")
     model_save_path = TestingConfig.get("model_save_path")
     visualization_save_path = TestingConfig.get("visualization_save_path")
 
@@ -22,7 +22,7 @@ def visualize():
     rnn_model.to(device)
     load_model(rnn_model, model_save_path)
 
-    _, _, _, X_test, y_test = get_windowed_data_splits(data_path, attribute, window_size, train_size)
+    _, _, _, X_test, y_test = get_windowed_data_splits(data_path, attribute, window_size, 1 - test_size)
 
     rnn_model.eval()
     with torch.inference_mode():
@@ -34,15 +34,3 @@ def visualize():
         plt.savefig(visualization_save_path)
 
 visualize()
-
-# preds = X_test[0].squeeze().tolist()
-#
-# for i in range( 20 ):
-#     new_pred = rnn_model(torch.tensor(preds[-4:], dtype=torch.float32).view(1,4,1))
-#     preds += [new_pred.item()]
-#
-# preds = np.array(preds[4:])
-#
-# plt.plot(np.arange(y_test.shape[0]), y_test, label="actual", color="blue" )
-# plt.plot( np.arange(20), preds, label="prediction", color="red" )
-# plt.savefig("RNN/visualizations/aaa.jpg")
