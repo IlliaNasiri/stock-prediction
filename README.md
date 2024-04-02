@@ -3,11 +3,20 @@
 ## Description ## 
 
 ## Sliding Window ##
+To make a sequence of  data appropriate for training a model, one approach is to slide a "window" over the data. Each slide of the window will generate a new row which will be a new training example: <br>
+
+![Sliding drawio](https://github.com/IlliaNasiri/stock-prediction/assets/135656013/da5be2a4-a16f-4788-971b-0f517db62e6b)
+<br>
 
 ## Architecture ##
+The architecture consists of two main parts: 1. RNN layers, 2. Dense layers. <br><br>
+**RNN layers:** one intuitive way to think about RNNs in my opinion is to think of it as a machine that converts (encodes) a sequence of an arbitrary length and dimensionality into a **fixed size** representation which is the hidden state. The last hidden state represents the information of the whole sequence given as a set of (n_hidden) numbers. An example would be if we fed an RNN a textbook or an email, regardless, it would still convert it to a vector of same size. Each element of this vector can potentially represent some feature of input, for example first element in the vector can correspond to whether 3 subsequent data points are increasing or decreasing, and so on...<br>
+![RNN intuition drawio](https://github.com/IlliaNasiri/stock-prediction/assets/135656013/1e59f092-e784-4f1a-b101-2f7609948576)
+<br>
+
+**Dense layers:** now that we have a fixed sized hidden state, we can pass it through a series of fully connected neural network layers, last of which will output a single number that represents the prediction. 
+
 ![RNN drawio](https://github.com/IlliaNasiri/stock-prediction/assets/135656013/7df3a7e6-3e85-494b-8af1-767e50c91290)
-
-
 
 ### config.py: ###
 this file allows you to configure the parameters of the training and testing phases for the RNN stock-prediction model, as well as the visualization.
@@ -15,10 +24,10 @@ this file allows you to configure the parameters of the training and testing pha
 ``` python
 
 ModelConfig = { # TO BE IMPLEMENTED
-    "n_features": 1,
-    "n_hidden:": 64,
-    "num_rnn_layers": 1,
-    "dense_layers": [(64, 64), (64, 1)]
+    "n_features": 1, # Tells you the dimesionality of each element in the sequence. (for prices it's 1)
+    "n_hidden:": 64, # Tells you to how many numbers the input is mapped to
+    "num_rnn_layers": 1, # tells how many stacked rnn layers 
+    "dense_layers": [(64, 128), (128, 1)] # the architecture of dense layers. Note: first element of the first tuple should be same number as n_hidden.  
 }
 
 
@@ -59,3 +68,8 @@ Based on the **config.py**, it will print out the loss on the testing dataset.
 
 ### visualize.py ###
 Based on the **config.py**, it will visualize the actual price as blue, and the predicted price as red. 
+
+Example Visualization trained on IBM.csv and tested on GOOG.csv:
+![comparison](https://github.com/IlliaNasiri/stock-prediction/assets/135656013/0abca124-46f6-4810-854e-860f65bf152b)
+
+
