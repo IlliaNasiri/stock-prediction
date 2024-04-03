@@ -5,9 +5,11 @@
 ## Sliding Window ##
 To make a sequence of  data appropriate for training a model, one approach is to slide a "window" over the data. Each slide of the window will generate a new row which will be a new training example: <br>
 
-![Sliding drawio](https://github.com/IlliaNasiri/stock-prediction/assets/135656013/da5be2a4-a16f-4788-971b-0f517db62e6b#gh-light-mode-only)
-<br>
-![Sliding drawio dark](https://github.com/IlliaNasiri/stock-prediction/assets/135656013/21c708da-a32b-4533-884e-b5841ae02796#gh-dark-mode-only)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/IlliaNasiri/stock-prediction/assets/135656013/2d7f9236-a95d-4c21-8ece-1557dd0d7c9a">
+  <source media="(prefers-color-scheme: light)" srcset="https://github.com/IlliaNasiri/stock-prediction/assets/135656013/da5be2a4-a16f-4788-971b-0f517db62e6b">
+  <img alt="Shows an illustrated sun in light mode and a moon with stars in dark mode." src="https://user-images.githubusercontent.com/25423296/163456779-a8556205-d0a5-45e2-ac17-42d089e3c3f8.png">
+</picture>
 
 
 ## Architecture ##
