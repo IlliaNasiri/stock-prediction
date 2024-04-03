@@ -5,8 +5,10 @@
 ## Sliding Window ##
 To make a sequence of  data appropriate for training a model, one approach is to slide a "window" over the data. Each slide of the window will generate a new row which will be a new training example: <br>
 
-![Sliding drawio](https://github.com/IlliaNasiri/stock-prediction/assets/135656013/da5be2a4-a16f-4788-971b-0f517db62e6b)
+![Sliding drawio](https://github.com/IlliaNasiri/stock-prediction/assets/135656013/da5be2a4-a16f-4788-971b-0f517db62e6b#gh-light-mode-only)
 <br>
+![Sliding drawio dark](https://github.com/IlliaNasiri/stock-prediction/assets/135656013/21c708da-a32b-4533-884e-b5841ae02796#gh-dark-mode-only)
+
 
 ## Architecture ##
 The architecture consists of two main parts: 1. RNN layers, 2. Dense layers. <br><br>
