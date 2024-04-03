@@ -8,19 +8,22 @@ To make a sequence of  data appropriate for training a model, one approach is to
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://github.com/IlliaNasiri/stock-prediction/assets/135656013/2d7f9236-a95d-4c21-8ece-1557dd0d7c9a">
   <source media="(prefers-color-scheme: light)" srcset="https://github.com/IlliaNasiri/stock-prediction/assets/135656013/da5be2a4-a16f-4788-971b-0f517db62e6b">
-  <img alt="Shows an illustrated sun in light mode and a moon with stars in dark mode." src="https://user-images.githubusercontent.com/25423296/163456779-a8556205-d0a5-45e2-ac17-42d089e3c3f8.png">
+  <img alt="Sliding Windows Explained">
 </picture>
 
 
 ## Architecture ##
 The architecture consists of two main parts: 1. RNN layers, 2. Dense layers. <br><br>
 **RNN layers:** one intuitive way to think about RNNs in my opinion is to think of it as a machine that converts (encodes) a sequence of an arbitrary length and dimensionality into a **fixed size** representation which is the hidden state. The last hidden state represents the information of the whole sequence given as a set of (n_hidden) numbers. An example would be if we fed an RNN a textbook or an email, regardless, it would still convert it to a vector of same size. Each element of this vector can potentially represent some feature of input, for example first element in the vector can correspond to whether 3 subsequent data points are increasing or decreasing, and so on...<br>
-![RNN intuition drawio](https://github.com/IlliaNasiri/stock-prediction/assets/135656013/1e59f092-e784-4f1a-b101-2f7609948576)
-<br>
 
 **Dense layers:** now that we have a fixed sized hidden state, we can pass it through a series of fully connected neural network layers, last of which will output a single number that represents the prediction. 
 
-![RNN drawio](https://github.com/IlliaNasiri/stock-prediction/assets/135656013/7df3a7e6-3e85-494b-8af1-767e50c91290)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/IlliaNasiri/stock-prediction/assets/135656013/ce6778f8-5352-4bd5-ab7a-83b8f804a755">
+  <source media="(prefers-color-scheme: light)" srcset="https://github.com/IlliaNasiri/stock-prediction/assets/135656013/7df3a7e6-3e85-494b-8af1-767e50c91290">
+  <img alt="Sliding Windows Explained">
+</picture>
+
 
 ### config.py: ###
 this file allows you to configure the parameters of the training and testing phases for the RNN stock-prediction model, as well as the visualization.
