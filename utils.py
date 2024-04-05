@@ -36,7 +36,7 @@ def csv_to_moving_window(path: str, attribute: str, window_size: int):
     data = sliding_window_view(data, window_size)
     return data.astype(np.float32)
 
-def get_windowed_data_splits(path, attr, window_size, percentage, convert_to_tensor=True, allow_gpu=True):
+def get_windowed_data_splits(path, attr, window_size, percentage, convert_to_tensor=True,label_width=1):
     """
     :param path: path to the preprocessed CSV data file
     :param attr: attrbute to retrieve from the CSV
@@ -44,6 +44,7 @@ def get_windowed_data_splits(path, attr, window_size, percentage, convert_to_ten
     :param percentage: how large is the training dataset
     :param convert_to_tensor whether to convert the data to torch tensor
     :param allow_gpu: whether to allow using GPU tensor if CUDA is available
+    :param label_width: what portion of the sequence is the label
     :return: returns tensors on the device (cpu/gpu):
     windowed_data:
     X_train:
@@ -51,16 +52,15 @@ def get_windowed_data_splits(path, attr, window_size, percentage, convert_to_ten
     X_test:
     y_test
     """
-    if allow_gpu:
-        device = "cuda" if (torch.cuda.is_available() and allow_gpu) else "cpu"
+    device = "cuda" if (torch.cuda.is_available()) else "cpu"
 
     windowed_data = csv_to_moving_window(path, attr, window_size)
-    X = windowed_data[:, :-1]
-    y = windowed_data[:, -1]
+    X = windowed_data[:, :-label_width]
+    y = windowed_data[:, -label_width:]
 
     if convert_to_tensor:
         X = torch.tensor(X).view(X.shape[0], X.shape[1], 1).to(device)
-        y = torch.tensor(y).view(y.shape[0], 1).to(device)
+        y = torch.tensor(y).view(y.shape[0], label_width).to(device)
 
     split_point = int(X.shape[0] * percentage)
     X_train, y_train, X_test, y_test = X[:split_point], y[:split_point], X[split_point:], y[split_point:]

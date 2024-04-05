@@ -8,17 +8,13 @@ def train():
     window_size = TrainingConfig.get("window_size")
     train_size = TrainingConfig.get("train_size")
     epochs = TrainingConfig.get("epochs")
+    label_width = TrainingConfig.get("label_width")
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
     rnn_model.to(device)
 
-    windowed_data, X_train, y_train, X_test, y_test = get_windowed_data_splits(data_path, attribute, window_size, train_size)
-
-    # define loss fn and an optimizer
-    # TODO: make optimizer and loss global so it could be used for both test.py and train.py
-
-
+    windowed_data, X_train, y_train, X_test, y_test = get_windowed_data_splits(data_path, attribute, window_size, train_size, label_width=label_width)
 
     for epoch in range(epochs):
         rnn_model.train()

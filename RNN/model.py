@@ -1,7 +1,9 @@
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
 from config import ModelConfig
+
+# def custom_loss(output, target):
+#     pass
 
 class RNN(nn.Module):
     def __init__(self, n_features, n_hidden, num_rnn_layers=1, dense_layers=[(64, 64), (64, 1)]):
@@ -21,7 +23,8 @@ class RNN(nn.Module):
         :param x: the input to the RNN, assumed to have dimenstions: (batch_size, length_of_sequence, n_features)
         :return: the predicted price
         """
-        h0 = torch.zeros(self.num_rnn_layers, x.shape[0], self.n_hidden)
+        device = "cuda" if torch.cuda.is_available() else "cpu"
+        h0 = torch.zeros(self.num_rnn_layers, x.shape[0], self.n_hidden).to(device)
         out, _ = self.rnn(x, h0)
 
         # y: last hidden state
@@ -41,6 +44,12 @@ n_hidden = ModelConfig.get("n_hidden")
 num_rnn_layers = ModelConfig.get("num_rnn_layers")
 dense_layers = ModelConfig.get("dense_layers")
 
+
 rnn_model = RNN(n_features, n_hidden, num_rnn_layers, dense_layers)
+
 loss = nn.L1Loss()
+# loss = nn.MSELoss()
+# loss = custom_loss
+
+
 optimizer = torch.optim.Adam(rnn_model.parameters())
