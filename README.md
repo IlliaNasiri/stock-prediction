@@ -30,7 +30,7 @@ this file allows you to configure the parameters of the training and testing pha
 
 ``` python
 
-ModelConfig = { # TO BE IMPLEMENTED
+ModelConfig = {
     "n_features": 1, # Tells you the dimesionality of each element in the sequence. (for prices it's 1)
     "n_hidden:": 64, # Tells you to how many numbers the input is mapped to
     "num_rnn_layers": 1, # tells how many stacked rnn layers 
