@@ -49,7 +49,7 @@ TrainingConfig = {
     "label_width": LABEL_WIDTH,
     "train_size": 1.0, # what portion of the dataset should be used for training
     "epochs": 300, # number of epochs for training
-    "model_save_path": "RNN/trained_models/rnn.pth" "RNN/trained_models/rnn.pth", # path where to save the model. NOTE: the folder MUST EXIST!
+    "model_save_path": "RNN/trained_models/rnn.pth" # path where to save the model. NOTE: the folder MUST EXIST!
 }
 
 TestingConfig = {
