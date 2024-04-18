@@ -30,27 +30,33 @@ this file allows you to configure the parameters of the training and testing pha
 
 ``` python
 
+N_HIDDEN = 64 # Tells you to how many numbers the input is mapped to
+LABEL_WIDTH = 5 # Tells how many values to predict ahead (5 next prices in this case)
+WINDOW_SIZE = 15 # Tells you what is the size of the window sliding through data (window size is 15, 10 values are given for trainin, 5 are considered labels because LABEL_WIDTH = 5)
+
 ModelConfig = {
     "n_features": 1, # Tells you the dimesionality of each element in the sequence. (for prices it's 1)
-    "n_hidden:": 64, # Tells you to how many numbers the input is mapped to
+    "n_hidden:": N_HIDDEN, 
     "num_rnn_layers": 1, # tells how many stacked rnn layers 
-    "dense_layers": [(64, 128), (128, 1)] # the architecture of dense layers. Note: first element of the first tuple should be same number as n_hidden.  
+    "dense_layers": [(N_HIDDEN, 256), (256, 512), (512, LABEL_WIDTH)] # the architecture of dense layers.
+     # Note: the numbers between tuples MUST agree, e.g: (128, **256**), (**256**, 512)  
 }
-
 
 TrainingConfig = {
     "data_path": "data/IBM.csv", # path to the CSV file to use for training
     "attribute": "Close", # the attribute that the RNN is going to be trained on
-    "window_size": 5, # Size of the sliding window
-    "train_size": 0.9, # what portion of the dataset should be used for training
-    "epochs": 500, # number of epochs for training
-    "model_save_path": "RNN/trained_models/rnn.pth", # path where to save the model. NOTE: the folder MUST EXIST!
+    "window_size": WINDOW_SIZE, # Size of the sliding window
+    "label_width": LABEL_WIDTH,
+    "train_size": 1.0, # what portion of the dataset should be used for training
+    "epochs": 300, # number of epochs for training
+    "model_save_path": "RNN/trained_models/rnn.pth" "RNN/trained_models/rnn.pth", # path where to save the model. NOTE: the folder MUST EXIST!
 }
 
 TestingConfig = {
     "data_path": "data/GOOG.csv", # path to the CSV file to use for testing
     "attribute": "close", # the attribute that the RNN is going to be tested on
-    "window_size": 5, # Size of the sliding window
+    "window_size": WINDOW_SIZE, # Size of the sliding window
+    "label_width": LABEL_WIDTH,
     "test_size": 0.0, #the portion of data used for testing
     "model_save_path": "RNN/trained_models/rnn.pth", # path where to find the model
     "visualization_save_path": #"RNN/visualizations/comparison.jpg" # NOTE: the folder MUST EXIST!
