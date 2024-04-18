@@ -59,7 +59,7 @@ TestingConfig = {
     "label_width": LABEL_WIDTH,
     "test_size": 0.0, #the portion of data used for testing
     "model_save_path": "RNN/trained_models/rnn.pth", # path where to find the model
-    "visualization_save_path": #"RNN/visualizations/comparison.jpg" # NOTE: the folder MUST EXIST!
+    "visualization_save_path": "RNN/visualizations/comparison.jpg" # NOTE: the folder MUST EXIST!
 }
 
 ```
